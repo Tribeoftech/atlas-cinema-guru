@@ -1,15 +1,7 @@
-* {
-  font-family: 'Roboto', sans-serif;
+.activity-list-item {
+  color: white;
+  font-size: 12;
 }
-
-.activity-item p {
-  font-size: 12px;
-  padding: 0 20px;
-  font-weight: bold;
-}
-
-.activity-item p b {
-  font-size: 12px;
-  font-weight: bold;
-  color: red;
+.red-text {
+  color: #F31D27;
 }

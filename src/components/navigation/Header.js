@@ -1,39 +1,41 @@
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './navigation.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
-
-export default function Header({userUsername, handleSetUserUsername, setIsLoggedIn, logout}) {
-  // Returns a header nav element
-
-  // Props:
-  // - userUsername: String - state of username
-  // - setIsLoggedIn: Function - sets state of isLoggedIn
-
-  // function to logout
-
-  return (
-    <nav className="navbar">
-      <ul>
-        <li className="title">
-          <p id="left">Cinema Guru</p>
-        </li>
-        <li className="picAndName">
-          <img src="https://picsum.photos/100/100" alt="logo" />
-          <p>Welcome, {userUsername}</p>
-        </li>
-        <li>
-          <span className="logout" onClick={() => {
-            logout();
-            setIsLoggedIn(false);
-            handleSetUserUsername("");
-            console.log(`Logout ${userUsername}`);
-          }} >
-            <FontAwesomeIcon icon="sign-out-alt" />
-            <p>Logout</p>
-          </span>
-        </li>
-      </ul>
-    </nav>
-  );
+const Header = ({ userUsername, setIsLoggedIn }) => {
+    const logout = () => {
+        console.log("logging you out");
+        localStorage.removeItem('accessToken');
+        setIsLoggedIn(false);
+    };
+    return (
+        <nav className='navbar'>
+                <div className="app-name">
+                    <p>Cinema Guru</p>
+                </div>
+                <div className="user-links">
+                    <div className="user-photo">
+                        <img src="https://picsum.photos/100/100" alt="avatar" />
+                    </div>
+                    <div className="welcome-text">
+                        <p>Welcome, {userUsername}!</p>
+                    </div>
+                    <div className='logout-div'>
+                        <span onClick={logout}>
+                            <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                            &nbsp;Logout
+                        </span>
+                    </div>
+                </div>
+        </nav>
+    );
 }
+
+Header.propTypes = {
+    userUserName: PropTypes.string.isRequired,
+    setIsLoggedIn: PropTypes.func.isRequired,
+}
+
+export default Header;

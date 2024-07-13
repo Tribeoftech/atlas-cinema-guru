@@ -1,106 +1,145 @@
-/* ###### general ###### */
-
-*:focus {
-  outline: none;
-}
-
-* {
-  font-family: 'Roboto', sans-serif;
-}
-
-/* ###### inputs ###### */
-
 .input-container {
   display: flex;
   flex-direction: column;
-  font-size: 1.2rem;
-  margin: 3.5rem 0;
+  margin: 10px;
+  padding: 10px;
 }
 
-.input-above {
-  align-self: flex-start;
+.label-container {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
 }
 
-.input-icon {
-  margin-right: 0.5rem;
-  color:rgb(184, 183, 183);
-}
-
-.input-text,
-.input-number,
-.input-select {
-  width: 100%;
-  height: 35px;
+input {
+  border: none;
   border-bottom: 1px solid red;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  padding: 0;
-  font-size: 1.2rem;
-  margin: 10px 0;
+  cursor: text;
+  outline: none;
 }
 
-.input-password {
-  width: 100%;
-  height: 35px;
-  border-bottom: 1px solid red;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  padding: 0;
-  font-size: 1.2rem;
-  margin: 10px 0;
+.input-light .icon-wrapper {
+  color: #000;
+  opacity: .4;
+  padding-right: 10px;
+}
+.input-light label {
+  color: #1C1C1C;
+  opacity: 1;
 }
 
-/* ###### button ###### */
+.input-dark input {
+  background-color: #2C2C2C;
+  color: #FFF;
+}
+.input-dark .icon-wrapper {
+  color: #FFF;
+  opacity: .4;
+  padding-right: 10px;
+}
+.input-dark label {
+  color: #FFF;
+  opacity: 1;
+}
+.input-dark .label-container {
+  background-color: #000;
+}
 
-.button-container {
+.input-error input {
+  border: 1px solid red;
+}
+.input-error label {
+  color: red;
+}
+.input-error .icon-wrapper {
+  color: red;
+  opacity: 1;
+}
+
+/* select input */
+
+.select-container {
+  /* style the select input container */
   display: flex;
   flex-direction: column;
-  float: right;
-}
-
-.button-container > button {
-  width: 160px;
-  height: 35px;
-  border-radius: 3px;
-  border: red;
+  background-color: #1C1C1C;
   color: white;
-  font-size: 1.2rem;
-  background-color: red;
-}
-
-.button-container > button:hover {
-  background-color: #f75151;
-  cursor: pointer;
-}
-
-.button-icon { 
-  margin-right: 1.0rem;
-}
-
-/* ###### search bar ###### */
-
-.search-bar-container {
-  color: rgb(138, 138, 138);
-}
-
-.search-bar-container:hover {
-  color: white;
-}
-
-.search-bar-container .search-bar {
-  width: 50%;
-  padding: 10px;
   border: none;
-  background-color: rgb(71, 71, 71);
-  border-radius: 50px;
-  text-align: center;
-  cursor: pointer;
+  margin: 15px;
 }
 
-.search-bar-container .search-bar-icon {
-  position: absolute;
-  padding: 10px;
-  min-width: 50px;
+.select-container label {
+  text-align: left;
+}
+
+.select-container select {
+  background-color: #2C2C2C;
+  color: white;
+  border: none;
+  border-bottom: 1px solid red;
+}
+
+.select-dark {
+  color: white;
+}
+
+/* search bar */
+.search-container {
+  /* figure out search styling later */
+  margin: 15px;
+  padding: 5px;
+  background-color: #2c2c2c;
+  display: flex;
+  flex-direction: row;
+  border: none;
+  border-radius: 15px;
+  color: lightgray;
+}
+
+.search-container input {
+  border-radius: 5px;
+  border: none;
+  background-color: #2c2c2c;
+  padding-left: 15px;
+  color: #FFF;
+  opacity: .6;
+  font-size: .75em;
+}
+
+.search-container:hover {
+  color: #FFF;
+  transition: color 1s ease;
+}
+.search-container input:hover {
+  color: #FFF;
+  opacity: 1;
+  transition: opacity .5s ease;
+}
+
+/* button */
+.button {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-size: .9em;
+  align-items: middle;
+}
+
+button:hover {
+  background-color: #BB000E;
+  transition: background-color 1s ease;
+}
+
+.button-icon {
+  padding-right: 5px;
+  margin: auto;
+}
+
+.button.light-red {
+  background-color: red !important;
+}
+.button.dark-red {
+  background-color: #BB000E !important;
 }

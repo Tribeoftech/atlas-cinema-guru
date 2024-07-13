@@ -1,19 +1,22 @@
-import React from "react";
-import './components.css';
+import './components.css'
+import React from 'react';
 
+const Activity = ({ activity }) => {
+    const dateString = activity.updatedAt;
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+    });
+    let listName = activity.activityType === "favorite" ? "Favorites" : "Watch Later";
+    return (
+        <li className='activity-list-item'>
+            <p>
+                <span className='red-text'>{activity.user.username}</span> added <span className='red-text'>{activity.title.title}</span> to {listName} - {formattedDate}
+            </p>
+        </li>
+    );
+};
 
-export default function Activity({activity}) {
-  // returns a li element with p tags for each activity
-
-  // Props:
-  // - activity: Object - activity object
-
-  return (
-    <li className="activity-item">
-      <p>
-        <b>{activity.user.name}</b> {activity.action} <b> {activity.subject.name}</b> to
-        <b> {activity.object.name}</b> - {activity.created_at}
-      </p>
-    </li>
-  );  
-}
+export default Activity;

@@ -1,36 +1,23 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './general.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import PropTypes from 'prop-types';
 
+const Button = ({ label, className, onClick, icon, type }) => {
+    return (
+        <button className={className} onClick={onClick} type={type}>
+            {icon && <FontAwesomeIcon icon={icon} className="button-icon" />}
+            {label}
+        </button>
+                );
+            };
+    
+    Button.propTypes = {
+        label: PropTypes.string.isRequired,
+        className: PropTypes.string,
+        onClick: PropTypes.func.isRequired,
+        icon: PropTypes.object,
+        endIcon: PropTypes.object,
+    };
 
-export default function Button({label, className, type, icon, onClick}) {
-  // returns a <button> element with the given attributes.
-
-  // Props:
-  // - label: String - button label
-  // - className: String - button className
-  // - type: String - button type
-  // - icon: (optional)FontAwesomeIcon - icon name to decorate button
-  // - onClick: (optional)Function - function to call when button is clicked
-
-  return (
-    <div className="button-container">
-      <button
-        className={className}
-        onClick={onClick}
-        type={type}
-      >
-        {/* if icon is defined */}
-        {icon &&
-          <FontAwesomeIcon
-            icon={icon}
-            className="button-icon"
-          />
-        }
-        <span className="button-label">
-          {label}
-        </span>
-      </button>
-    </div>
-  )
-}
+export default Button;

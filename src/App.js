@@ -1,74 +1,30 @@
-import React, { useState, useEffect } from 'react';
-// import Input from './components/general/Input';
-// import SelectInput from './components/general/SelectInput';
-// import Button from './components/general/Button';
-// import SearchBar from './components/general/SearchBar';
-import axios from 'axios';
+import 'normalize.css';
 import './App.css';
-import Authentication from './routes/auth/Authentication';
-import Dashboard from './routes/dashboard/Dashboard';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import Authentication from './routes/auth/Authentication.js';
+import Dashboard from './routes/dashboard/Dashboard.js';
 
 function App() {
-  // init state for isLoggedIn
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  // init state for userUsername
-  const [userUsername, setUserUsername] = useState('');
+  const [userUsername, setUserUsername] = useState("");
 
-  // handle setIsLoggedIn
-  const handleSetIsLoggedIn = (value) => {
-    setIsLoggedIn(value);
-  }
-
-  // handle setUserUsername
-  const handleSetUserUsername = (value) => {
-    setUserUsername(value);
-  }
-
-  // event handler for on mount
   useEffect(() => {
-    // get value of accessToken from localStorage
     const accessToken = localStorage.getItem('accessToken');
-    // send post request to /api/auth with auth header set to 'Bearer <accessToken>'
-    axios
-      .post(`http://localhost:8000/api/auth`, {}, {
+    if (accessToken) {
+      axios.post('http://localhost:8000/api/auth/', {}, {
         headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
+          Authorization: `Bearer ${accessToken}`
+        }
+      }).then(response => {
+        setIsLoggedIn(true);
+        setUserUsername(response.data.username);
       })
-      .then((res) => {
-        // on success, set isLoggedIn to true
-        handleSetIsLoggedIn(true);
-        // on success, set userUsername to res.data.username
-        handleSetUserUsername(res.data.username);
-        console.log(res.data.username);
-      })
-      .catch((err) => {
-        // on failure, set isLoggedIn to false
-        handleSetIsLoggedIn(false);
-        // on failure, set userUsername to ''
-        handleSetUserUsername('');
-        console.log(err);
-      });
+    }
   }, []);
-
   return (
     <div className="App">
-      {/* if isLoggedIn is true, show Dashboard component */}
-      {isLoggedIn ? (
-        <Dashboard 
-          userUsername={userUsername} 
-          setIsLoggedIn={handleSetIsLoggedIn} 
-          handleSetUserUsername={handleSetUserUsername}
-        />
-      ) : (
-        /* if isLoggedIn is false, show Authentication component */
-          <Authentication 
-            setIsLoggedIn={handleSetIsLoggedIn}
-            setUserUsername={handleSetUserUsername}
-          />
-        // <Authentication />
-      )}
-
+      {isLoggedIn ? <Dashboard userUsername={userUsername} setIsLoggedIn={setIsLoggedIn} /> : <Authentication setUserUsername={setUserUsername} setIsLoggedIn={setIsLoggedIn} />}
     </div>
   );
 }
